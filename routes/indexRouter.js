@@ -3,7 +3,7 @@ const indexRouter = Router();
 
 
 indexRouter.get('/', (req, res)=> {
-    res.send("Fuck U Ronaldo")
+    res.render("index")
 })
 
 module.exports = indexRouter;
