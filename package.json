@@ -2,7 +2,7 @@
   "name": "file-uploader_odin",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "homepage": "https://github.com/HaileabWolde/File-Uploader_Odin#readme",
   "bugs": {
     "url": "https://github.com/HaileabWolde/File-Uploader_Odin/issues"
@@ -15,7 +15,7 @@
   "author": "Haileab",
   "main": "index.js",
   "scripts": {
-     "dev": "nodemon app.js",
+    "dev": "nodemon app.js",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch"
@@ -23,8 +23,18 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@quixo3/prisma-session-store": "^3.1.21",
+    "bcryptjs": "^3.0.3",
+    "connect-pg-simple": "^10.0.0",
+    "dayjs": "^1.11.21",
     "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
     "nodemon": "^3.1.14",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.22.0",
     "prisma": "^7.8.0"
   }

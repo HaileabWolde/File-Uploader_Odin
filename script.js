@@ -1,7 +1,10 @@
-import { prisma } from "./lib/prisma.js";
+const prisma = require('./lib/prisma');
 
 async function main() {
+  await prisma.post.deleteMany()
+    await prisma.user.deleteMany()
   // Create a new user with a post
+  /*
   const user = await prisma.user.create({
     data: {
       name: "Alice",
@@ -27,6 +30,7 @@ async function main() {
     },
   });
   console.log("All users:", JSON.stringify(allUsers, null, 2));
+  */
 }
 
 main()
