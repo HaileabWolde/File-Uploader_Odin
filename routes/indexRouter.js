@@ -14,7 +14,15 @@ indexRouter.get('/', (req, res)=> {
 })
 
 indexRouter.get('/login', (req, res)=> {
-    res.render("log_in")
+    const messages = req.session.messages || [];
+    
+    // Optional: clear the messages so they don't show again on refresh
+    req.session.messages = [];
+
+    res.render("log_in", {
+        errors: messages.map(msg => ({ msg }))
+    });
+    
 })
 
 indexRouter.get('/sign-up', (req, res)=> {
@@ -22,5 +30,12 @@ indexRouter.get('/sign-up', (req, res)=> {
 })
 
 indexRouter.post('/signup', validateUser, createUser) 
+indexRouter.post("/login",
+ 
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureMessage: true,
+  }))
 
 module.exports = indexRouter;
