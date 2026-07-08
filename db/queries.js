@@ -11,6 +11,12 @@ async function createUser(username, password){
       password: `${hashedPassword}`
    }
 });
+  const alluser = await prisma.user.findMany({
+    include: {
+      posts: true,
+    },
+  })
+  console.log(alluser)
   return user;
 
 }

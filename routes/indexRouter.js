@@ -2,15 +2,14 @@ const {Router}  = require("express");
 const passport = require("passport");
 const indexRouter = Router();
 const {createUser, validateUser} = require("../controllers/userQuery")
+const { isAuthenticated } = require("../isAuth/isAuthenticated")
+const {createFolder} = require("../controllers/folderQuery")
 
-indexRouter.get('/', (req, res)=> {
-    if(!req.user){
-        res.redirect('/login')
-    }
-    else {
-          res.render("index")
-    }
-  
+///get routes
+indexRouter.get('/', isAuthenticated, (req, res)=>{
+    res.render("index", {
+           user: req.user,
+    })
 })
 
 indexRouter.get('/login', (req, res)=> {
@@ -29,7 +28,10 @@ indexRouter.get('/sign-up', (req, res)=> {
     res.render("sign_up")
 })
 
+
+// post routes
 indexRouter.post('/signup', validateUser, createUser) 
+indexRouter.post('/folder/create' , createFolder)
 indexRouter.post("/login",
  
   passport.authenticate("local", {
@@ -37,5 +39,13 @@ indexRouter.post("/login",
     failureRedirect: "/login",
     failureMessage: true,
   }))
-
+indexRouter.get('/log-out', (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+}
+)
 module.exports = indexRouter;

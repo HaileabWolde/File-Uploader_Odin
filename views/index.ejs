@@ -6,11 +6,24 @@
     <title>File Uploader</title>
     <!-- Point to the compiled output file, not the input file -->
     <link rel="stylesheet" href="/css/output.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+      <script src="/folder.js" defer></script> 
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="text-center p-8 bg-white shadow-xl rounded-2xl max-w-md">
-        <h1 class="text-3xl font-extrabold text-blue-600 mb-2">Tailwind works!</h1>
-        <p class="text-gray-600">Successfully styled your EJS template engine using Tailwind utility classes.</p>
+<body class="bg-gray-100  h-screen">
+      <%- include('header', {user: locals.user, }) %>
+       <%- include('dialogModal', {user: locals.user, }) %>
+    <div class="grid grid-cols-1 md:grid-cols-[20%_80%] h-full">
+        <div class="p-4 border-r border-gray-300 shadow-md flex flex-col gap-4 h-full">
+            <button
+            id="add_folderbutton" 
+            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer">
+            <i class="fas fa-folder-plus"></i>
+                    New Folder
+            </button>
+    </div>
+        <div class="flex items-center justify-center">
+            <h1>hello motherfucker</h1>
+        </div>
     </div>
 </body>
 </html>

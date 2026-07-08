@@ -23,7 +23,7 @@ model User {
   username    String @unique
   password    String
   role    Role     @default(USER) 
-  Folder   Folder[]
+  folders  Folder[] // ← lowercase plural
   
 } 
 model Folder { 
