@@ -1,6 +1,6 @@
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const { prisma } = require("../lib/prisma.js");
+const  prisma  = require("../lib/prisma.js");
 const LocalStrategy = require('passport-local').Strategy;
 
 const verifyCallback = async (username, password, done) => {
