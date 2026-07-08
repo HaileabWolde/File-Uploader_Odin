@@ -7,6 +7,7 @@ async function createFolder(req, res){
     console.log(newid)
     try{
         await db.createFolder(foldername, newid)
+        
         res.redirect("/")
     }
     catch(error){
@@ -14,6 +15,19 @@ async function createFolder(req, res){
     }
 }
 
+async function childrenFolder(req, res){
+    const {id} = req.params
+     const newid = Number(id)
+    try{
+        await db.childrenFolders(newid)
+      
+    }
+    catch(error){
+        console.log("error", error)
+    }
+}
+
 module.exports = {
-    createFolder
+    createFolder,
+    childrenFolder
 }

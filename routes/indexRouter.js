@@ -1,16 +1,12 @@
 const {Router}  = require("express");
 const passport = require("passport");
 const indexRouter = Router();
-const {createUser, validateUser} = require("../controllers/userQuery")
+const {createUser, validateUser, allfoldersofUser} = require("../controllers/userQuery")
 const { isAuthenticated } = require("../isAuth/isAuthenticated")
-const {createFolder} = require("../controllers/folderQuery")
+const {createFolder, childrenFolder} = require("../controllers/folderQuery")
 
 ///get routes
-indexRouter.get('/', isAuthenticated, (req, res)=>{
-    res.render("index", {
-           user: req.user,
-    })
-})
+indexRouter.get('/', isAuthenticated, allfoldersofUser)
 
 indexRouter.get('/login', (req, res)=> {
     const messages = req.session.messages || [];
@@ -28,6 +24,7 @@ indexRouter.get('/sign-up', (req, res)=> {
     res.render("sign_up")
 })
 
+indexRouter.get('/folder/:id',  childrenFolder)
 
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 

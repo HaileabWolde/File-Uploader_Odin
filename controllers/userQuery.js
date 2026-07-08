@@ -1,6 +1,7 @@
 const { body, validationResult, matchedData } = require("express-validator");
 const { Prisma } = require ("../generated/prisma/client");
 const db = require("../db/queries");
+const dbOne = require("../db/folderqueries")
 
 const alphaErr = "must only contain letters.";
 const lengthErr = "must be between 1 and 10 characters.";
@@ -43,7 +44,23 @@ async function createUser(req, res, next){
 }
 }
 
+async function allfoldersofUser(req, res){
+    const {id} = req.user
+    try{
+       const allfolders = await dbOne.allCreatedFolders(id)
+          res.render("index", {
+           user: req.user,
+           allfolders: allfolders
+    })
+    }
+    catch(error){
+        console.log("error", error)
+    }
+
+}
+
 module.exports = {
     createUser,
-    validateUser
+    validateUser,
+    allfoldersofUser
 }
