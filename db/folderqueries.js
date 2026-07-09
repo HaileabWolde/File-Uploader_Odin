@@ -34,13 +34,22 @@ async function allCreatedFolders(id){
 }
 
 async function childrenFolders(id) {
-  const folderWithChildren = await prisma.folder.findUnique({
-  where: { id: id },
-  include: { children: true } // or whatever your relation field is named in schema
+  const folderWithChildren = await prisma.folder.findMany({
+  where: { parentId: id },
 });
  console.log(folderWithChildren)
   return folderWithChildren
   
+}
+
+async function createchildrenFolders(userid, parentFolderid , foldername){
+   const newFolder = await prisma.folder.create({
+   data: {
+    authorId: userid,
+    title: foldername,
+    parentId: parentFolderid
+   }
+});
 }
 module.exports = {
     createFolder,

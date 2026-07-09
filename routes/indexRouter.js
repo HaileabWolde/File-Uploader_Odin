@@ -3,7 +3,7 @@ const passport = require("passport");
 const indexRouter = Router();
 const {createUser, validateUser, allfoldersofUser} = require("../controllers/userQuery")
 const { isAuthenticated } = require("../isAuth/isAuthenticated")
-const {createFolder, childrenFolder} = require("../controllers/folderQuery")
+const {createFolder, childrenFolder, createchildrenFolder} = require("../controllers/folderQuery")
 
 ///get routes
 indexRouter.get('/', isAuthenticated, allfoldersofUser)
@@ -24,10 +24,11 @@ indexRouter.get('/sign-up', (req, res)=> {
     res.render("sign_up")
 })
 
-indexRouter.get('/folder/:id',  childrenFolder)
+indexRouter.get('/folder/:name/:id',  childrenFolder)
 
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 
+indexRouter.post('/folder/:name/:parentid', createchildrenFolder)
 indexRouter.post('/folder/create' , createFolder)
 indexRouter.post("/login",
  
@@ -36,6 +37,9 @@ indexRouter.post("/login",
     failureRedirect: "/login",
     failureMessage: true,
   }))
+
+
+  //log out
 indexRouter.get('/log-out', (req, res, next) => {
   req.logout((err) => {
     if (err) {
