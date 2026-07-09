@@ -1,5 +1,4 @@
 
-//dialgo Showing Logic 
 
 
 const dialog = document.getElementById('dialog')

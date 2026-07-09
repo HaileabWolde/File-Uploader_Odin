@@ -15,14 +15,17 @@ async function createFolder(req, res){
 }
 
 async function childrenFolder(req, res){
-    const {id} = req.params
+    const {name, id} = req.params
      const newid = Number(id)
      const user = req.user
+     
     try{
        const allchildrenFolder = await db.childrenFolders(newid)
        res.render("subFolder", {
         allchildrenFolder: allchildrenFolder,
-        user: user
+        user: user,
+        name: name,
+        id: id
        })
       
     }

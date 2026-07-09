@@ -29,8 +29,12 @@ async function allCreatedFolders(id){
     where: { id: id },
     include: { folders: true },
   })
-  const allfolders = await user.folders
- return allfolders
+  
+  const allparentFolders = user.folders.filter((f)=> {
+    return f.parentId === null
+  })
+  console.log(allparentFolders)
+ return allparentFolders
 }
 
 async function childrenFolders(id) {
@@ -54,5 +58,6 @@ async function createchildrenFolders(userid, parentFolderid , foldername){
 module.exports = {
     createFolder,
     allCreatedFolders,
-    childrenFolders
+    childrenFolders,
+    createchildrenFolders
 }
