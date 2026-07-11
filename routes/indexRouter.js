@@ -1,9 +1,24 @@
 const {Router}  = require("express");
 const passport = require("passport");
 const indexRouter = Router();
+const multer = require("multer");
+//
 const {createUser, validateUser, allfoldersofUser} = require("../controllers/userQuery")
 const { isAuthenticated } = require("../isAuth/isAuthenticated")
 const {createFolder, childrenFolder, createchildrenFolder} = require("../controllers/folderQuery")
+
+
+const fileStorageEngine = multer.diskStorage({
+  destination: (req, file, cb)=>{
+    cb(null, "./public/images")
+  },
+  filename: (req, file, cb)=>{
+    cb(null, Date.now() + "--" + file.originalname);
+  }
+})
+
+const upload = multer({ storage: fileStorageEngine})
+
 
 ///get routes
 indexRouter.get('/', isAuthenticated, allfoldersofUser)
@@ -29,6 +44,10 @@ indexRouter.get('/folder/:name/:id',  childrenFolder)
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 
 indexRouter.post('/folder/:name/:parentid', createchildrenFolder)
+indexRouter.post('/file/:name/:parentid', upload.array("images", 3), (req, res)=> {
+  console.log(req.files)
+  res.send("fuck u bitch")
+})
 indexRouter.post('/folder/create' , createFolder)
 indexRouter.post("/login",
  

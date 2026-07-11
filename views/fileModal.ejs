@@ -1,0 +1,31 @@
+ <div 
+ id="filedialogModal" 
+ class="hidden fixed inset-0 bg-black/70 flex items-center justify-center ">
+   
+    <dialog 
+    id="filedialog"
+    class="justify-self-center self-center bg-white rounded-3xl shadow-2xl max-w-md w-full  overflow-hidden">
+     
+        
+      <form method="POST" 
+      action="/file/<%=name%>/<%=id%>"
+      id="fileform"
+      enctype="multipart/form-data"
+      class="flex flex-col gap-4 rounded-3xl p-10 shadow-2xl">
+    
+    <div class="flex justify-between items-center cursor-pointer">
+        <h1 class="text-gray-800 font-semibold text-lg">New File</h1>
+        <button type="button" id="cancelFileButton">✕</button>
+    </div>
+
+    <input id="fileinput" name="images" type="file" multiple
+           class="w-full border-2 border-[#54ACDB] rounded-2xl px-5 py-4">
+    
+    <button type="submit"
+            class="bg-blue-600 hover:bg-blue-700 transition-colors py-2 px-4 rounded-2xl font-semibold text-lg text-white self-end">
+        Upload
+    </button>
+</form>
+      
+    </dialog>
+</div>

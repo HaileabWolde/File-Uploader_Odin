@@ -33,7 +33,7 @@ async function allCreatedFolders(id){
   const allparentFolders = user.folders.filter((f)=> {
     return f.parentId === null
   })
-  console.log(allparentFolders)
+ 
  return allparentFolders
 }
 
@@ -41,7 +41,6 @@ async function childrenFolders(id) {
   const folderWithChildren = await prisma.folder.findMany({
   where: { parentId: id },
 });
- console.log(folderWithChildren)
   return folderWithChildren
   
 }
