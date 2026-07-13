@@ -6,7 +6,7 @@ const multer = require("multer");
 const {createUser, validateUser, allfoldersofUser} = require("../controllers/userQuery")
 const { isAuthenticated } = require("../isAuth/isAuthenticated")
 const {createFolder, childrenFolder, createchildrenFolder} = require("../controllers/folderQuery")
-
+const {createFile} = require("../controllers/fileQuery")
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb)=>{
@@ -44,10 +44,7 @@ indexRouter.get('/folder/:name/:id',  childrenFolder)
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 
 indexRouter.post('/folder/:name/:parentid', createchildrenFolder)
-indexRouter.post('/file/:name/:parentid', upload.array("images", 3), (req, res)=> {
-  console.log(req.files)
-  res.send("fuck u bitch")
-})
+indexRouter.post('/file/:name/:parentid', upload.array("images", 3), createFile)
 indexRouter.post('/folder/create' , createFolder)
 indexRouter.post("/login",
  
