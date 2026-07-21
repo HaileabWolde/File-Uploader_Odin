@@ -8,6 +8,8 @@ const { isAuthenticated } = require("../isAuth/isAuthenticated")
 const {createFolder, childrenFolder, createchildrenFolder} = require("../controllers/folderQuery")
 const {createFile} = require("../controllers/fileQuery")
 
+
+
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb)=>{
     cb(null, "./public/images")
@@ -16,9 +18,19 @@ const fileStorageEngine = multer.diskStorage({
     cb(null, Date.now() + "--" + file.originalname);
   }
 })
-
-const upload = multer({ storage: fileStorageEngine}).array("images", 3)
-
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'application/pdf') {
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid file type, only PNG and JPEG is allowed!'), false);
+  }
+};
+const upload = multer({ 
+  storage: fileStorageEngine,   
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024  // 5MB max per file
+  },})
 
 ///get routes
 indexRouter.get('/', isAuthenticated, allfoldersofUser)
@@ -44,7 +56,7 @@ indexRouter.get('/folder/:name/:id',  childrenFolder)
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 
 indexRouter.post('/folder/:name/:parentid', createchildrenFolder)
-indexRouter.post('/file/:name/:parentid', upload, createFile)
+indexRouter.post('/file/:name/:parentid',  upload.array("images", 3), createFile)
 indexRouter.post('/folder/create' , createFolder)
 indexRouter.post("/login",
  

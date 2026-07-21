@@ -1,14 +1,17 @@
 const  prisma  = require("../lib/prisma.js");
+
 const db = require("../db/filequeries")
 const dbOne = require("../db/folderqueries")
+
+
+
+
 
 async function createFile(req, res){  
   const {name, parentid} = req.params
   const parentID = Number(parentid)
   const user = req.user
-    if (!req.files || req.files.length === 0) {
-        return res.status(400).send("No valid files uploaded — only images and PDFs allowed")
-    }
+   
   try {
    //const deleteUsers = await prisma.file.deleteMany({});
 

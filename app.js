@@ -53,16 +53,18 @@ app.use((req,res)=>{
 
 // Keep this as is for real server errors
 app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    if (err.code === 'LIMIT_UNEXPECTED_FILE') {
-      return res.status(400).json({
-        error: 'File limit exceeded',
-        detail: 'You sent more files than the endpoint allows.'
-      });
+ 
+    if (err instanceof multer.MulterError) {    
+     return res.status(400).send("Multer error: " + err.message);
+    } 
+    else if(err.message === "Invalid file type, only PNG and JPEG is allowed!"){
+      return res.status(400).send("is u serious my nigga")
     }
-  }
-    console.error(err);
+    else {
+       console.error(err.message);
     res.status(400).render("partials/errorPage");
+    }
+   
 });
 
 const PORT = process.env.PORT || 3000;
