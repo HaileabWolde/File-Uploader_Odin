@@ -56,7 +56,22 @@ indexRouter.get('/folder/:name/:id',  childrenFolder)
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 
 indexRouter.post('/folder/:name/:parentid', createchildrenFolder)
-indexRouter.post('/file/:name/:parentid',  upload.array("images", 3), createFile)
+indexRouter.post('/file/:name/:parentid',  (req, res, next) => {
+    upload.array("images", 3)(req, res, function(err) {
+        const { name, parentid } = req.params;
+        if (err instanceof multer.MulterError) {
+          const targetedArray = ["Too many files or file too large — max 3 files, 5MB each"]
+          req.session.uploadError = targetedArray;
+            return res.redirect(`/folder/${name}/${parentid}`);
+        }
+        else if (err) {
+          const targetedArray = [err.message];
+            req.session.uploadError = targetedArray;
+            return res.redirect(`/folder/${name}/${parentid}`);
+        }
+        next(); // no error, continue to createFile
+    });
+}, createFile)
 indexRouter.post('/folder/create' , createFolder)
 indexRouter.post("/login",
  

@@ -53,17 +53,7 @@ app.use((req,res)=>{
 
 // Keep this as is for real server errors
 app.use((err, req, res, next) => {
- 
-    if (err instanceof multer.MulterError) {    
-     return res.status(400).send("Multer error: " + err.message);
-    } 
-    else if(err.message === "Invalid file type, only PNG and JPEG is allowed!"){
-      return res.status(400).send("is u serious my nigga")
-    }
-    else {
-       console.error(err.message);
     res.status(400).render("partials/errorPage");
-    }
    
 });
 

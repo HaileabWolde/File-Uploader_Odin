@@ -17,12 +17,15 @@ async function createFolder(req, res){
 }
 
 async function childrenFolder(req, res){
+    const uploadError = req.session.uploadError || [];
+   req.session.uploadError = null; // clear it after reading
+
     const {name, id} = req.params
      const newid = Number(id)
      const user = req.user
      
     try{
-       const allchildrenFolder = await db.childrenFolders(newid)
+        const allchildrenFolder = await db.childrenFolders(newid)
        const folderwithFile = await db.folderwithFile(newid)
        
        res.render("subFolder", {
@@ -30,14 +33,15 @@ async function childrenFolder(req, res){
         folderwithFile: folderwithFile.file,
         user: user,
         name: name,
-        id: id
+        id: id,
+        errors: uploadError.map(msg=> ({msg}))
        })
-      
     }
     catch(error){
         console.log("error", error)
         next(error)
     }
+       
 }
 
 async function createchildrenFolder(req, res){

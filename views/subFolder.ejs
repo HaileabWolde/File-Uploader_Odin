@@ -13,6 +13,7 @@
       <%- include('header', {user: locals.user, }) %>
        <%- include('folderModal', {user: locals.user,   name, id}) %>
        <%- include('fileModal', {user: locals.user,   name, id})%>
+         <%-include("./partials/error.ejs") %>
     <div class="grid grid-cols-1 md:grid-cols-[20%_80%] h-full">
         <div class="p-4 border-r border-gray-300 shadow-md flex flex-col gap-4 h-full">
             <button
