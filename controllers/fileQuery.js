@@ -6,26 +6,32 @@ async function createFile(req, res){
   const {name, parentid} = req.params
   const parentID = Number(parentid)
   const user = req.user
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).send("No valid files uploaded — only images and PDFs allowed")
+    }
   try {
-    const deleteUsers = await prisma.file.deleteMany({});
+   //const deleteUsers = await prisma.file.deleteMany({});
 
-    /*
+    
     
     // Wait for all file database operations to finish before sending the response
     await Promise.all(
       req.files.map(async (file) => {
+        
         try {
-          const { filename, mimetype, path, size } = file;
-          await db.createFile(parentID, filename, mimetype, path, size);
+          const filepath = `/images/${file.filename}`
+          const { filename, mimetype, size } = file;
+          await db.createFile(parentID, file.originalname, mimetype, filepath, size);
         } catch (error) {
           console.log('Error saving file:', error);
         }
       })
     );
 
-    const folderContent = await dbOne.childrenFolders(parentID)
-    const folderwithFile = await dbOne.folderwithFile(parentID)
-    console.log(folderwithFile)
+
+    res.redirect(`/folder/${name}/${parentid}`)
+    /*
+    console.log(folderwithFile.file)
     
      res.render("subFolder", {
         allchildrenFolder: folderContent,
@@ -34,9 +40,9 @@ async function createFile(req, res){
         name: name,
         id: parentid
        })
-      */
+      
     
-    
+    */
   } catch (error) {
     console.log("error", error)
     res.status(500).send('Server error');

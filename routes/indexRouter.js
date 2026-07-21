@@ -17,7 +17,7 @@ const fileStorageEngine = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: fileStorageEngine})
+const upload = multer({ storage: fileStorageEngine}).array("images", 3)
 
 
 ///get routes
@@ -44,7 +44,7 @@ indexRouter.get('/folder/:name/:id',  childrenFolder)
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 
 indexRouter.post('/folder/:name/:parentid', createchildrenFolder)
-indexRouter.post('/file/:name/:parentid', upload.array("images", 3), createFile)
+indexRouter.post('/file/:name/:parentid', upload, createFile)
 indexRouter.post('/folder/create' , createFolder)
 indexRouter.post("/login",
  

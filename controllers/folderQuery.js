@@ -4,6 +4,9 @@ async function createFolder(req, res){
     const {foldername} = req.body;
     const {id} = req.user
     const newid = Number(id)
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).send("No valid files uploaded — only images and PDFs allowed")
+    }
     try{
         await db.createFolder(foldername, newid)
         
@@ -11,6 +14,7 @@ async function createFolder(req, res){
     }
     catch(error){
         console.log("error", error)
+        next(error)
     }
 }
 
@@ -21,8 +25,11 @@ async function childrenFolder(req, res){
      
     try{
        const allchildrenFolder = await db.childrenFolders(newid)
+       const folderwithFile = await db.folderwithFile(newid)
+       
        res.render("subFolder", {
         allchildrenFolder: allchildrenFolder,
+        folderwithFile: folderwithFile.file,
         user: user,
         name: name,
         id: id
@@ -31,6 +38,7 @@ async function childrenFolder(req, res){
     }
     catch(error){
         console.log("error", error)
+        next(error)
     }
 }
 
@@ -48,6 +56,7 @@ async function createchildrenFolder(req, res){
        }
        catch(error){
         console.log("error", error)
+        next(error)
        }
 }
 
