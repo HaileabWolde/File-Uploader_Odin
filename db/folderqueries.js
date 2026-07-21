@@ -44,7 +44,15 @@ async function childrenFolders(id) {
   return folderWithChildren
   
 }
-
+async function folderwithFile(id){
+  const folderwithFile = await prisma.folder.findUnique({
+    where: {
+      id: id,
+    },
+    include: {file: true}
+  })
+  return folderwithFile
+}
 async function createchildrenFolders(userid, parentFolderid , foldername){
    const newFolder = await prisma.folder.create({
    data: {
@@ -58,5 +66,6 @@ module.exports = {
     createFolder,
     allCreatedFolders,
     childrenFolders,
-    createchildrenFolders
+    createchildrenFolders,
+    folderwithFile
 }

@@ -48,6 +48,7 @@ async function allfoldersofUser(req, res){
     const {id} = req.user
     try{
        const allfolders = await dbOne.allCreatedFolders(id)
+     
           res.render("index", {
            user: req.user,
            allfolders: allfolders
