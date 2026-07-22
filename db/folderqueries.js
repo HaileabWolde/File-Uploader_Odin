@@ -29,11 +29,8 @@ async function allCreatedFolders(id){
     where: { id: id },
     include: { folders: true },
   })
-  
-  const allparentFolders = user.folders.filter((f)=> {
-    return f.parentId === null
-  })
- 
+  console.log(user)
+  const allparentFolders = user.folders
  return allparentFolders
 }
 

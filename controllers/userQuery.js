@@ -48,10 +48,14 @@ async function allfoldersofUser(req, res){
     const {id} = req.user
     try{
        const allfolders = await dbOne.allCreatedFolders(id)
-     
+        const allparentFolders = allfolders.filter((f)=> {
+    return f.parentId === null
+  })
+ 
           res.render("index", {
            user: req.user,
-           allfolders: allfolders
+           allfolders: allfolders,
+           allparentFolders: allparentFolders
     })
     }
     catch(error){

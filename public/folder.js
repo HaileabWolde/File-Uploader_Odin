@@ -8,6 +8,15 @@ const cancelButton = document.getElementById('cancelFolderButton')
 const folderbutton = document.getElementById('add_folderbutton');
 
 
+//
+const folderToggle = document.getElementById('folderToggle')
+const icon = document.getElementById('toggleIcon')
+const folderList = document.getElementById('folderList')
+
+folderToggle.addEventListener('click', ()=> {
+    icon.classList.toggle('rotate-90')
+    folderList.classList.toggle('hidden')
+})
 
 folderbutton.addEventListener("click", ()=>{
     dialogModal.classList.remove('hidden')
