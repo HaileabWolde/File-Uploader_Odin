@@ -13,40 +13,17 @@
       <%- include('header', {user: locals.user, }) %>
        <%- include('dialogModal', {user: locals.user, }) %>
     <div class="grid grid-cols-1 md:grid-cols-[20%_80%] h-full">
-        <div class="p-4 border-r border-gray-300 shadow-md flex flex-col gap-4 h-full">
-            <button
-            id="add_folderbutton" 
-            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer mb-8">
-            <i class="fas fa-folder-plus"></i>
-                    New Folder
-            </button>
-           <ul>
-                 <div class="flex items-center gap-2 cursor-pointer" id="folderToggle">
-                         <i id="toggleIcon" class="fa-solid fa-chevron-right transition-all duration-200"></i>
-                        <h1 class="text-lg font-semibold text-gray-800"><%=user.username.toUpperCase()%></h1>
-                </div>
-    
-                 <div id="folderList">
-                          <% allparentFolders.map((folder) => { %>
-                            <li class="cursor-pointer w-full p-4 flex items-center gap-2 rounded-sm">
-                                <i class="fas fa-folder text-yellow-400"></i>
-                                 <p><%= folder.title %></p>
-                             </li>
-                         <% }) %>
-                 </div>
-        </ul>
-        </div>
+        <%- include('aside', {user: locals.user, allparentFolders: locals.allparentFolders, childrenFolder: locals.childrenFolder})%>
         <div class="px-4 py-4 flex flex-col gap-2">
-            <%allparentFolders.map((folder)=> {
-                %>
-                <a
-                href="/folder/<%=folder.title%>/<%=folder.id%>" 
-                class=" cursor-pointer w-full p-4 shadow-xl  flex items-center gap-2 rounded-lg bg-gray-500 text-white">
-                     <i class="fas fa-folder-plus "></i>
-                     <p class=""><%=folder.title%></p>
+
+            <% allparentFolders.forEach((folder) => { %>
+                <a href="/folder/<%= folder.title %>/<%= folder.id %>" 
+                   class="cursor-pointer w-full p-4 shadow-xl flex items-center gap-2 rounded-lg bg-gray-500 text-white hover:bg-gray-600">
+                    <i class="fas fa-folder"></i>
+                    <p><%= folder.title %></p>
                 </a>
-                <%
-            })%>
+            <% }) %>
+       
         </div>
     </div>
 </body>

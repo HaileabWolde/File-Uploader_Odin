@@ -1,0 +1,87 @@
+  <div class="p-4 border-r border-gray-300 shadow-md flex flex-col gap-2  h-full">
+            <button
+            id="add_folderbutton" 
+            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer mb-8">
+            <i class="fas fa-folder-plus"></i>
+                    New Folder
+            </button>
+              <button
+            id="add_filebutton"
+            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer"
+            >
+               <i class="fa-solid fa-file"></i>
+                    New File
+            </button>
+           <ul>
+                 <div
+                 id="toggleIcon" 
+                 class="flex items-center gap-2 cursor-pointer" id="folderToggle">
+                         <i id="toggleIcondirection" class="fa-solid fa-chevron-down transition-all duration-200"></i>
+                        <h1 class="text-lg font-semibold text-gray-800"><%=user.username.toUpperCase()%></h1>
+                </div>
+    
+                 <div id="folderList">
+                          <% allparentFolders.map((folder) => { %>
+                            <li 
+                            
+                            class="togglechildrenIcon cursor-pointer w-full p-4 flex flex-col  gap-2 rounded-sm">
+                                <div
+                               
+                                class=" flex items-center gap-2">
+                                    <i  class="toggleicon fa-solid fa-chevron-down transition-all duration-200"></i>
+                                    <a
+                                    class="flex items-center gap-2" 
+                                    href="/folder/<%= folder.title %>/<%= folder.id %>">
+                                            <i class="fas fa-folder text-yellow-400"></i>
+                                            <p><%= folder.title.toUpperCase()%></p>
+                                    </a>
+                                    
+                                </div>
+                                
+                                 <ul class="childrenList ml-8">
+                                      <%childrenFolder.forEach(f=> { %>
+                                             <% if (f.parentId === folder.id) { %>
+                                                    <li class="subcontainer cursor-pointer w-full  flex flex-col  gap-2 rounded-sm">
+                                                            <div  class=" flex items-center gap-2">
+                                                                 <i  class="subtoggleicon fa-solid fa-chevron-down transition-all duration-200"></i>
+                                                                 <a
+                                                                   class="flex items-center gap-2" 
+                                                                 href="/folder/<%= f.title %>/<%= f.id %>"
+                                                                 >
+                                                                    <i class="fas fa-folder text-yellow-400"></i>
+                                                              
+                                                                 <p><%= f.title%></p>
+                                                                 </a>
+                                                                 
+                                                            </div>
+                                                         
+                                                            <ul class="subchildrenList ml-12">
+                                                                <%f.children.map(folder=> {%>
+                                                                    <% if(folder.parentId === f.id){
+                                                                        %>
+                                                                        <li class="flex items-center gap-2">
+                                                                                <a
+                                                                               class="flex items-center gap-2" 
+                                                                              href="/folder/<%= folder.title %>/<%= folder.id %>"
+                                                                                >
+                                                                                <i class="fas fa-folder text-yellow-400"></i>
+                                                                              <p><%= folder.title%></p>
+                                                                            </a>
+                                                                               
+                                                                        </li>
+                                                                         
+                                                                        <%
+                                                                    }%>
+                                                                    <%}) %>
+                                                             </ul>
+                                                    </li>
+                                                     
+                                                  
+                                                <% }  %>
+                                     <% }) %>
+                                 </ul>
+                             </li>
+                         <% }) %>
+                 </div>
+        </ul>
+        </div>

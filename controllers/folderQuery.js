@@ -20,20 +20,40 @@ async function childrenFolder(req, res){
     const uploadError = req.session.uploadError || [];
    req.session.uploadError = null; // clear it after reading
 
-    const {name, id} = req.params
-     const newid = Number(id)
+    const {name, parentid} = req.params
+     const newid = Number(parentid)
      const user = req.user
+     const {id} = req.user
      
     try{
         const allchildrenFolder = await db.childrenFolders(newid)
        const folderwithFile = await db.folderwithFile(newid)
-       
+       const allfolders = await db.allCreatedFolders(id)
+       const allparentFolders = allfolders.filter((f)=> {
+                        return f.parentId === null
+                   })
+         
+      const childrenFolder = await Promise.all(
+              allparentFolders.map(async (f)=> {
+                   try{
+                        return await db.childrenFolders(f.id)
+                   }
+                   catch(error){
+                       console.log("error", error)
+                   }
+              
+              })
+           )
+          
+    const flatChildren = childrenFolder.flat()
        res.render("subFolder", {
         allchildrenFolder: allchildrenFolder,
         folderwithFile: folderwithFile.file,
         user: user,
         name: name,
-        id: id,
+        id: parentid,
+        allparentFolders: allparentFolders,
+        childrenFolder: flatChildren,
         errors: uploadError.map(msg=> ({msg}))
        })
     }

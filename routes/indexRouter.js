@@ -51,7 +51,7 @@ indexRouter.get('/sign-up', (req, res)=> {
     res.render("sign_up")
 })
 
-indexRouter.get('/folder/:name/:id',  childrenFolder)
+indexRouter.get('/folder/:name/:parentid',  childrenFolder)
 
 // post routes
 indexRouter.post('/signup', validateUser, createUser) 

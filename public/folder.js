@@ -1,6 +1,5 @@
 
 
-
 const dialog = document.getElementById('dialog')
 const dialogModal = document.getElementById('dialogModal')
 const cancelButton = document.getElementById('cancelFolderButton')
@@ -8,29 +7,10 @@ const cancelButton = document.getElementById('cancelFolderButton')
 const folderbutton = document.getElementById('add_folderbutton');
 
 
-//
-const folderToggle = document.getElementById('folderToggle')
-const icon = document.getElementById('toggleIcon')
-const folderList = document.getElementById('folderList')
-
-folderToggle.addEventListener('click', ()=> {
-    icon.classList.toggle('rotate-90')
-    folderList.classList.toggle('hidden')
-})
-
 folderbutton.addEventListener("click", ()=>{
     dialogModal.classList.remove('hidden')
     dialog.showModal()
 })
-
-//Cance the modal dialog
-cancelButton.addEventListener('click', ()=> {
-      dialog.close()
-      dialogModal.classList.add('hidden');  
-   // stops form submission
-    
-})
-
 
 // file modal
 const filemodalButton = document.getElementById('add_filebutton')
@@ -39,13 +19,62 @@ const filedialog  = document.getElementById('filedialog')
 const cancelFileButton = document.getElementById('cancelFileButton')
 
 
-filemodalButton.addEventListener("click", ()=>{
-   
-    filedialogModal.classList.remove('hidden')
-    filedialog.showModal()
+if (filemodalButton) {
+    filemodalButton.addEventListener("click", () => {
+        filedialogModal.classList.remove('hidden')
+        filedialog.showModal()
+    })
+}
+
+if (cancelFileButton) {
+    cancelFileButton.addEventListener('click', () => {
+        filedialogModal.classList.add('hidden')
+        filedialog.close()
+    })
+}
+
+if(cancelButton){
+    //Cance the modal dialog
+cancelButton.addEventListener('click', ()=> {
+      dialog.close()
+      dialogModal.classList.add('hidden');  
+   // stops form submission
+    
+})
+}
+
+
+
+
+
+//toogle Folder
+document.querySelectorAll('.togglechildrenIcon').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+         const icon = toggle.querySelector('.toggleicon')
+        const childrenList = toggle.querySelector('.childrenList')
+        
+        icon.classList.toggle('rotate-270')
+        childrenList.classList.toggle('hidden')
+    })
 })
 
-cancelFileButton.addEventListener('click', ()=> {
-   filedialogModal.classList.add('hidden')
-    filedialog.close()    
+document.getElementById('toggleIcon').addEventListener('click', ()=>{
+    const toggleIcondirection = document.getElementById('toggleIcondirection')
+    const folderList  = document.getElementById('folderList')
+
+    toggleIcondirection.classList.toggle('rotate-270')
+    folderList.classList.toggle('hidden')
 })
+
+document.querySelectorAll('.subcontainer').forEach((sub)=> {
+    sub.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const icon = sub.querySelector('.subtoggleicon')
+         const childrenList = sub.querySelector('.subchildrenList')
+         icon.classList.toggle('rotate-270')
+        childrenList.classList.toggle('hidden')
+    })
+})
+
+
+

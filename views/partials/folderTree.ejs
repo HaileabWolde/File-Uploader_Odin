@@ -1,0 +1,16 @@
+<!-- partials/folderTree.ejs -->
+<li class="cursor-pointer w-full p-2 flex flex-col gap-1">
+    <div class="flex items-center gap-2">
+        <i class="fa-solid fa-chevron-right transition-all duration-200"></i>
+        <i class="fas fa-folder text-yellow-400"></i>
+        <p><%= folder.title.toUpperCase() %></p>
+    </div>
+
+    <% if (folder.children && folder.children.length > 0) { %>
+        <ul class=" ml-6 hidden">
+            <% folder.children.forEach(child => { %>
+                <%- include('folderTree', { folder: child }) %>   <!-- Pass singular 'folder' -->
+            <% }) %>
+        </ul>
+    <% } %>
+</li>

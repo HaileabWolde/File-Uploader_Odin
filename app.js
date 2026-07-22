@@ -53,6 +53,7 @@ app.use((req,res)=>{
 
 // Keep this as is for real server errors
 app.use((err, req, res, next) => {
+  console.log(err)
     res.status(400).render("partials/errorPage");
    
 });
@@ -67,3 +68,7 @@ app.listen(PORT, (error) => {
   }
   console.log(`My first Express app - listening on port ${PORT}!`);
 });
+
+
+
+ 

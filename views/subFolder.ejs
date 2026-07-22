@@ -11,26 +11,11 @@
 </head>
 <body class="bg-gray-100  h-screen">
       <%- include('header', {user: locals.user, }) %>
-       <%- include('folderModal', {user: locals.user,   name, id}) %>
-       <%- include('fileModal', {user: locals.user,   name, id})%>
+       <%- include('folderModal', {user: locals.user, name, id}) %>
+       <%- include('fileModal', {user: locals.user, name, id})%>
          <%-include("./partials/error.ejs") %>
     <div class="grid grid-cols-1 md:grid-cols-[20%_80%] h-full">
-        <div class="p-4 border-r border-gray-300 shadow-md flex flex-col gap-4 h-full">
-            <button
-            id="add_folderbutton" 
-            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer">
-            <i class="fas fa-folder-plus"></i>
-                    New Folder
-            </button>
-            <button
-            id="add_filebutton"
-            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer"
-            >
-               <i class="fa-solid fa-file"></i>
-                    New File
-            </button>
-    </div>
-    
+          <%- include('aside', {user: locals.user, allparentFolders: locals.allparentFolders, childrenFolder: locals.childrenFolder})%>
          
         <div class="px-4 py-4 flex flex-col gap-2">
            <% folderwithFile.map((file)=> { %>

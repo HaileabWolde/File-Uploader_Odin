@@ -49,13 +49,30 @@ async function allfoldersofUser(req, res){
     try{
        const allfolders = await dbOne.allCreatedFolders(id)
         const allparentFolders = allfolders.filter((f)=> {
-    return f.parentId === null
-  })
+                 return f.parentId === null
+            })
+   // console.log(allfolders)
+    //console.log(allparentFolders)
+    const childrenFolder = await Promise.all(
+       allparentFolders.map(async (f)=> {
+            try{
+                 return await dbOne.childrenFolders(f.id)
+            }
+            catch(error){
+                console.log("error", error)
+            }
+       
+       })
+    )
+   
+    const flatChildren = childrenFolder.flat() 
+    console.log(flatChildren)
  
           res.render("index", {
            user: req.user,
            allfolders: allfolders,
-           allparentFolders: allparentFolders
+           allparentFolders: allparentFolders,
+           childrenFolder: flatChildren
     })
     }
     catch(error){
