@@ -4,7 +4,7 @@
    
     <dialog 
     id="dialog"
-    class="justify-self-center self-center bg-white rounded-3xl shadow-2xl max-w-md w-full  overflow-hidden">
+    class="justify-self-center self-center bg-white rounded-3xl shadow-2xl max-w-md w-full  overflow-hidden relative">
      
         
         <!-- Body -->
@@ -31,7 +31,10 @@
                    type="submit"
                    class="bg-blue-600 hover:bg-blue-700 transition-colors py-2 px-4 rounded-2xl font-semibold text-lg text-white self-end cursor-pointer"
                    >Create Folder</button>
-              <button type="button" id="cancelFolderButton">✕</button>
+              <button
+              class="absolute top-8 right-8 text-xl cursor-pointer" 
+              type="button" 
+              id="cancelFolderButton">✕</button>
         </form>
 
       

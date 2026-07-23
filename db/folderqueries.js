@@ -60,10 +60,22 @@ async function createchildrenFolders(userid, parentFolderid , foldername){
    }
 });
 }
+
+async function deletechildrenFolders(id){
+  await prisma.folder.deleteMany({
+     where: { parentId: id },
+  })
+  await prisma.folder.delete({
+    where: {
+      id: id
+    }
+  })
+}
 module.exports = {
     createFolder,
     allCreatedFolders,
     childrenFolders,
     createchildrenFolders,
-    folderwithFile
+    folderwithFile,
+    deletechildrenFolders
 }

@@ -5,7 +5,8 @@ const multer = require("multer");
 //
 const {createUser, validateUser, allfoldersofUser} = require("../controllers/userQuery")
 const { isAuthenticated } = require("../isAuth/isAuthenticated")
-const {createFolder, childrenFolder, createchildrenFolder} = require("../controllers/folderQuery")
+const {createFolder, childrenFolder, 
+  createchildrenFolder, deletechildrenFolders} = require("../controllers/folderQuery")
 const {createFile} = require("../controllers/fileQuery")
 
 
@@ -73,6 +74,7 @@ indexRouter.post('/file/:name/:parentid',  (req, res, next) => {
     });
 }, createFile)
 indexRouter.post('/folder/create' , createFolder)
+indexRouter.post('/delete/folder/:name/:id', deletechildrenFolders)
 indexRouter.post("/login",
  
   passport.authenticate("local", {

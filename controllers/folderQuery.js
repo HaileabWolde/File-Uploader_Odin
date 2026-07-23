@@ -82,8 +82,21 @@ async function createchildrenFolder(req, res){
        }
 }
 
+async function deletechildrenFolders(req, res){
+    const{name, id} = req.params
+    const newid = Number(id)
+    try{
+        await db.deletechildrenFolders(newid)
+        res.redirect("/")
+    }
+    catch(error){
+        console.log('error', error)
+        next(error)
+    }
+}
 module.exports = {
     createFolder,
     childrenFolder,
-    createchildrenFolder
+    createchildrenFolder,
+    deletechildrenFolders
 }
