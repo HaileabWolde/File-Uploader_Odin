@@ -1,0 +1,32 @@
+ <div 
+ id="deletedialogModal" 
+ class="hidden fixed inset-0 bg-black/70 flex items-center justify-center ">
+   
+    <dialog 
+    id="dialogdeleteDiv"
+    class="justify-self-center self-center bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <!-- Header -->
+        <div class="bg-red-600 px-6 py-4 text-white flex items-center gap-3">
+            <i class="fa-solid fa-circle-exclamation text-2xl"></i>
+            <h3 class="font-semibold text-lg">Are You Sure You Want To Delete This Folder and it's content at all?</h3>
+        </div>
+        
+        <!-- Body -->
+        <form
+         method="GET" 
+        action="/delete/folder/<%=name%>/<%=id%>"
+        id="mydialogform"
+        class="p-8 text-center flex justify-between">
+        
+            <button 
+                    class="outline-none cursor-pointer"
+                   type="submit">Delete</button>
+            <button
+                   type="button"  
+                   class="cursor-pointer"
+                   id="canceldeleteButton">Cancel</button>
+        </form>
+
+      
+    </dialog>
+</div>

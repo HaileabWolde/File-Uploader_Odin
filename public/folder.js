@@ -43,9 +43,25 @@ cancelButton.addEventListener('click', ()=> {
 })
 }
 
+const delete_folderbutton = document.getElementById('delete_folderbutton')
+const deletedialogModal = document.getElementById('deletedialogModal')
+const dialogDiv = document.getElementById('dialogdeleteDiv')
+const canceldeleteButton = document.getElementById('canceldeleteButton')
 
+if (delete_folderbutton && deletedialogModal && dialogDiv) {
+    delete_folderbutton.addEventListener('click', () => {
+        console.log("clicked")
+        deletedialogModal.classList.remove('hidden')
+        dialogDiv.showModal()
+    })
+}
 
-
+//Cance the modal dialog
+canceldeleteButton.addEventListener('click', ()=> {
+     dialogDiv.close()
+      deletedialogModal.classList.add('hidden');        // stops form submission
+    
+})
 
 //toogle Folder
 document.querySelectorAll('.togglechildrenIcon').forEach(toggle => {

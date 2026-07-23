@@ -1,23 +1,35 @@
-  <div class="p-4 border-r border-gray-300 shadow-md flex flex-col gap-2  h-full">
+  <div class="p-8 border-r border-gray-300 shadow-md flex flex-col  h-full">
             <button
             id="add_folderbutton" 
-            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer mb-8">
+            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer mb-6">
             <i class="fas fa-folder-plus"></i>
                     New Folder
             </button>
               <button
             id="add_filebutton"
-            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer"
+            class="bg-blue-600 hover:bg-blue-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer mb-6"
             >
                <i class="fa-solid fa-file"></i>
                     New File
             </button>
-           <ul>
+            <button
+            id="delete_folderbutton"
+            class="bg-red-600 hover:bg-red-700 rounded-2xl px-4 py-2 text-white flex items-center gap-2 cursor-pointer"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+                    Delete Folder
+            </button>
+           <ul class="mt-4">
                  <div
                  id="toggleIcon" 
                  class="flex items-center gap-2 cursor-pointer" id="folderToggle">
                          <i id="toggleIcondirection" class="fa-solid fa-chevron-down transition-all duration-200"></i>
-                        <h1 class="text-lg font-semibold text-gray-800"><%=user.username.toUpperCase()%></h1>
+                         <a
+                         class="text-lg font-semibold text-gray-800" 
+                         href="/">
+                            <%=user.username.toUpperCase()%>
+                         </a>
+                        
                 </div>
     
                  <div id="folderList">
