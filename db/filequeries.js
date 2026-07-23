@@ -1,12 +1,12 @@
 const  prisma  = require("../lib/prisma.js");
 
-async function createFile(parentID, filename, mimetype, filepath, size){
+async function createFile(parentID, filename, mimetype, path, size){
     const file = await prisma.file.create({
         data: {
             folderId: parentID,
             title: filename,
               type: mimetype,
-            filepath: filepath,
+            filepath: path,
             size: size,
         }
     })

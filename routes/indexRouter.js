@@ -10,7 +10,9 @@ const {createFolder, childrenFolder,
 const {createFile} = require("../controllers/fileQuery")
 
 
-
+const uploadMiddleware = require("../uploadMiddleware");
+const upload = uploadMiddleware("Haileab");
+/*
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb)=>{
     cb(null, "./public/images")
@@ -31,7 +33,7 @@ const upload = multer({
   fileFilter: fileFilter,
   limits: {
     fileSize: 5 * 1024 * 1024  // 5MB max per file
-  },})
+  },})*/
 
 ///get routes
 indexRouter.get('/', isAuthenticated, allfoldersofUser)

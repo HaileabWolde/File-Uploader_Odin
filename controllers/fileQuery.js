@@ -11,7 +11,7 @@ async function createFile(req, res){
   const {name, parentid} = req.params
   const parentID = Number(parentid)
   const user = req.user
-   
+   console.log(req.files)
   try {
    //const deleteUsers = await prisma.file.deleteMany({});
 
@@ -22,9 +22,10 @@ async function createFile(req, res){
       req.files.map(async (file) => {
         
         try {
-          const filepath = `/images/${file.filename}`
-          const { filename, mimetype, size } = file;
-          await db.createFile(parentID, file.originalname, mimetype, filepath, size);
+        //  const filepath = `/images/${file.filename}`
+        
+          const { filename, mimetype, size, path } = file;
+          await db.createFile(parentID, file.originalname, mimetype, path, size);
         } catch (error) {
           console.log('Error saving file:', error);
         }
